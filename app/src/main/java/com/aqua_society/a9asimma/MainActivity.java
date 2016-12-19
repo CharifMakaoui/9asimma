@@ -226,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                 user_info.putExtra(KEYS.USER_EMAIL_INTENT, inputEmail.getText().toString());
                 user_info.putExtra(KEYS.USER_TELE_INTENT, inputTele.getText().toString());
                 MainActivity.this.startActivity(user_info);
+                finish();
             }
         }, (rn.nextInt(10 - 3 + 1)) * 500);
     }
