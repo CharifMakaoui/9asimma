@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">قسيمة شراء</string>
+
+    <!-- Third Party Apps Configuration -->
+    <string name="facebook_app_id">854195894628205</string>
+    <string name="market_id">com.app.xxxx</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3123455537023531/8727300401</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-3123455537023531/3760547203</string>
+    <string name="native_ad_unit_id">ca-app-pub-3123455537023531/6405012401</string>
+
+    <!-- Inputs and Buttons Texts -->
+    <string name="hint_name">الإسم الكامل</string>
+    <string name="hint_email">البريد الإلكتروني</string>
+    <string name="hint_tele">رقم الهاتف</string>
+    <string name="btn_sign_up">تسجيل الطلب</string>
+    <string name="btn_next">الخطوة الموالية</string>
+
+    <!-- Error Messages -->
+    <string name="err_msg_name">أدخل إسمك الكامل</string>
+    <string name="err_msg_email">أدخل عنوان بريد صحيح</string>
+    <string name="err_msg_password">أدخل رقم هاتف صالح للتواصل معك</string>
+
+    <string name="click_signUp_message">إظغط تسجيل الطلب ليتم حفظ بياناتك و التوصل بالقسيمة</string>
+    <string name="Done_Message"> مبروك لقد تم قبولك . لتفعيل التسجيل و التوصل بقسيمة الشراء يجب تقييم التطبيق 4 أو 5 نجوم , إظغط على الصورة للتقييم </string>
+    <string name="Done_Message_Notif"> ملاحظة : نقوم بإرسال القسائم بعد أقل من 48 ساعة من تقييم التطبيق ! </string>
+</resources>
