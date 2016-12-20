@@ -20,6 +20,8 @@
     <string name="err_msg_email">أدخل عنوان بريد صحيح</string>
     <string name="err_msg_password">أدخل رقم هاتف صالح للتواصل معك</string>
 
+    <string name="loading_start">جاري تسجيل بياناتك المرجو الإنتظار</string>
+    <string name="save_done">تم التسجيل بنجاح</string>
     <string name="click_signUp_message">إظغط تسجيل الطلب ليتم حفظ بياناتك و التوصل بالقسيمة</string>
     <string name="Done_Message"> مبروك لقد تم قبولك . لتفعيل التسجيل و التوصل بقسيمة الشراء يجب تقييم التطبيق 4 أو 5 نجوم , إظغط على الصورة للتقييم </string>
     <string name="Done_Message_Notif"> ملاحظة : نقوم بإرسال القسائم بعد أقل من 48 ساعة من تقييم التطبيق ! </string>

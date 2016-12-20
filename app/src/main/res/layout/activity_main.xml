@@ -107,27 +107,8 @@
                 android:visibility="gone"
                 android:text="@string/click_signUp_message"/>
 
-            <Button android:id="@+id/btn_signup"
-                android:visibility="gone"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_sign_up"
-                android:background="@color/colorPrimary"
-                android:layout_marginTop="40dp"
-                android:textColor="@android:color/white"/>
 
         </LinearLayout>
-
-        <com.google.android.gms.ads.NativeExpressAdView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView_native"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adUnitId="@string/native_ad_unit_id"
-            ads:adSize="280x200">
-        </com.google.android.gms.ads.NativeExpressAdView>
-
 
     </LinearLayout>
 
@@ -135,7 +116,17 @@
         android:id="@+id/Loading_area"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loading_start"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textColor="#FFF"
+            android:layout_marginTop="150dp" />
 
         <io.github.yuweiguocn.lib.squareloading.SquareLoading
             android:layout_width="match_parent"
@@ -149,6 +140,46 @@
             app:yCount="3"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/SaveDone"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_done"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textColor="#009911"
+            android:layout_marginTop="150dp" />
+
+        <Button android:id="@+id/btn_signup"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_sign_up"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+
+    <com.google.android.gms.ads.NativeExpressAdView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView_native"
+        android:layout_marginTop="350dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adUnitId="@string/native_ad_unit_id"
+        ads:adSize="FULL_WIDTHx132">
+    </com.google.android.gms.ads.NativeExpressAdView>
 
     <RelativeLayout
         android:id="@+id/adMobView"

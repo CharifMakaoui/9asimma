@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText inputName, inputEmail, inputTele;
     private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutTele;
     private Button btnSignUp, btnNext;
-    private LinearLayout Loading_area, user_info_collect;
+    private LinearLayout Loading_area, user_info_collect, SaveDone;
     private ListView listVilles;
     private TextView click_signUp_message;
     AdView mAdView;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         mAdView.setAdSize(AdSize.BANNER);
         mAdView.setAdUnitId(getBaseContext().getString(R.string.banner_ad_unit_id));
         ((RelativeLayout) adContainer).addView(mAdView);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         mAdView.loadAd(adRequest);
     }
 
@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         Loading_area = (LinearLayout) findViewById(R.id.Loading_area);
         user_info_collect = (LinearLayout) findViewById(R.id.user_info_collect);
+        SaveDone = (LinearLayout) findViewById(R.id.SaveDone);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
         inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
@@ -158,6 +159,13 @@ public class MainActivity extends AppCompatActivity {
                         ShowNext();
                     }
                 }
+                else{
+                    switch (curent){
+                        case -1 : Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.err_msg_name),Toast.LENGTH_SHORT).show(); break;
+                        case 0 : Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.err_msg_email),Toast.LENGTH_SHORT).show(); break;
+                        case 1 : Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.err_msg_password),Toast.LENGTH_SHORT).show(); break;
+                    }
+                }
             }
         });
 
@@ -166,9 +174,26 @@ public class MainActivity extends AppCompatActivity {
         listVilles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+
                 listVilles.setVisibility(View.GONE);
-                btnSignUp.setVisibility(View.VISIBLE);
-                click_signUp_message.setVisibility(View.VISIBLE);
+                btnSignUp.setVisibility(View.GONE);
+                SaveDone.setVisibility(View.GONE);
+                Loading_area.setVisibility(View.VISIBLE);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Loading_area.setVisibility(View.GONE);
+                        SaveDone.setVisibility(View.VISIBLE);
+                        btnSignUp.setVisibility(View.VISIBLE);
+                    }
+                }, 15000);
+
+                click_signUp_message.setVisibility(View.GONE);
                 Toast.makeText(getBaseContext(),"Selected : "+villeList[position], Toast.LENGTH_LONG).show();
             }
         });
@@ -181,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void ShowNext(){
+    private void ShowNext() {
         if(isValid){
             this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             curent++;
@@ -190,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
                     inputLayoutEmail.setVisibility(View.VISIBLE);
                     inputLayoutTele.setVisibility(View.GONE);
                     listVilles.setVisibility(View.GONE);
+                    SaveDone.setVisibility(View.GONE);
                     break;
                 case 1 :    inputLayoutName.setVisibility(View.GONE);
                     inputLayoutEmail.setVisibility(View.GONE);
@@ -197,38 +223,33 @@ public class MainActivity extends AppCompatActivity {
                     listVilles.setVisibility(View.GONE);
                     btnNext.setVisibility(View.VISIBLE);
                     btnSignUp.setVisibility(View.GONE);
+                    SaveDone.setVisibility(View.GONE);
                     break;
                 case 2 :    inputLayoutName.setVisibility(View.GONE);
                     inputLayoutEmail.setVisibility(View.GONE);
                     inputLayoutTele.setVisibility(View.GONE);
                     listVilles.setVisibility(View.VISIBLE);
+                    native_adView.setVisibility(View.GONE);
                     btnNext.setVisibility(View.GONE);
                     btnSignUp.setVisibility(View.GONE);
+                    SaveDone.setVisibility(View.GONE);
+
                     break;
 
             }
+
+            isValid = false;
         }
     }
 
     private void submitForm(){
         hideKeybord();
-        user_info_collect.setVisibility(View.GONE);
-        Loading_area.setVisibility(View.VISIBLE);
-
-
-        final Handler handler = new Handler();
-        Random rn = new Random();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent user_info = new Intent(MainActivity.this, UserInfoActivity.class);
-                user_info.putExtra(KEYS.USER_NAME_INTENT, inputName.getText().toString());
-                user_info.putExtra(KEYS.USER_EMAIL_INTENT, inputEmail.getText().toString());
-                user_info.putExtra(KEYS.USER_TELE_INTENT, inputTele.getText().toString());
-                MainActivity.this.startActivity(user_info);
-                finish();
-            }
-        }, (rn.nextInt(10 - 3 + 1)) * 500);
+        Intent user_info = new Intent(MainActivity.this, UserInfoActivity.class);
+        user_info.putExtra(KEYS.USER_NAME_INTENT, inputName.getText().toString());
+        user_info.putExtra(KEYS.USER_EMAIL_INTENT, inputEmail.getText().toString());
+        user_info.putExtra(KEYS.USER_TELE_INTENT, inputTele.getText().toString());
+        MainActivity.this.startActivity(user_info);
+        finish();
     }
 
     private boolean validateName() {

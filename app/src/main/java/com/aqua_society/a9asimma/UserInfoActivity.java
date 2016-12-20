@@ -40,6 +40,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         initView();
 
+        //
         banner_AdsInit();
         interstitial_AddInit();
     }
@@ -107,7 +108,7 @@ public class UserInfoActivity extends AppCompatActivity {
                     ShowNext();
                 }
             }
-        }, (rn.nextInt(20 - 10 + 1)) * 10000);
+        }, rn.nextInt(5000) );
     }
 
     private void requestNewInterstitial() {
